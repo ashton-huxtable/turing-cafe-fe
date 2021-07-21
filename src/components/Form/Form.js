@@ -9,12 +9,26 @@ class Form extends Component {
             name: '',
             date: '',
             time: '',
-            number: ''
+            number: 0
         }
     }
 
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value})
+    }
+
+    submitForm = (event) => {
+        event.preventDefault();
+        const newReservation = {
+            ...this.state
+        }
+
+        this.props.addReservation(newReservation)
+        this.clearInput();
+    }
+
+    clearInput = () => {
+        this.setState({name: '', date: '', time: '', number: 0})
     }
 
     render(){
@@ -25,30 +39,30 @@ class Form extends Component {
                     placeholder='Name'
                     name='name'
                     value={this.state.name}
-                    onChange={(event) => this.handleChange(event)}
+                    onChange={this.handleChange}
                 />
                  <input 
                     type='text'
                     placeholder='Date (mm/dd'
                     name='date'
                     value={this.state.date}
-                    onChange={(event) => this.handleChange(event)}
+                    onChange={this.handleChange}
                 />
                  <input 
                     type='text'
                     placeholder='Time'
                     name='time'
                     value={this.state.time}
-                    onChange={(event) => this.handleChange(event)}
+                    onChange={this.handleChange}
                 />
                  <input 
-                    type='text'
+                    type='number'
                     placeholder='Number of guests'
                     name='number'
                     value={this.state.number}
-                    onChange={(event) => this.handleChange(event)}
+                    onChange={this.handleChange}
                 />
-                <button>Make Reservation</button>
+                <button onClick={(event) => this.submitForm(event)}>Make Reservation</button>
             </form>
         )
     }
