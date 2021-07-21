@@ -2,9 +2,12 @@ import React from 'react';
 
 import './Reservations.css'
 
-const Reservations = () => {
+const Reservations = ({reservations}) => {
+    
+    // const allReservations = reservations.map()
+    
     return (
-        <h2>reservcations</h2>
+        
     )
 }
 
