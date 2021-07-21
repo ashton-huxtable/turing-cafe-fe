@@ -21,4 +21,8 @@ describe('Main page user flow', () => {
             .type('{uparrow}')
             .should('have.value', '1')
     })
+
+    it('Should be able to submit the form', () => {
+        cy.get('button').contains('Make Reservation').click();
+    })
 })
