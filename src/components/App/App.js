@@ -1,5 +1,5 @@
 import Form from '../Form/Form';
-import { getAllReservations } from '../../apiCalls';
+import { addNewReservation, getAllReservations } from '../../apiCalls';
 import React, { Component } from 'react';
 import Reservations from '../Reservations/Reservations';
 import './App.css';
@@ -24,7 +24,12 @@ class App extends Component {
   }
 
   addReservation = (newReservation) => {
-    this.setState({reservations: [...this.state.reservations, newReservation]})
+    addNewReservation(newReservation)
+      .then(data => {
+        this.setState({reservations: [...this.state.reservations, newReservation]})
+
+      })
+      .catch(error => this.setState({error: 'Data could not be posted'}))
   }
 
 
@@ -33,9 +38,13 @@ class App extends Component {
       <div className="App">
         <h1 className='app-title'>Turing Cafe Reservations</h1>
         <div className='resy-form'>
+    
           <Form addReservation={this.addReservation}/>
         </div>
         <div className='resy-container'>
+          {(!this.state.reservations.length && this.state.error.length) &&
+            <h2 className='error'>{this.state.error}</h2>
+          }
           <Reservations reservations={this.state.reservations}/>
         </div>
       </div>
