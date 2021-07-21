@@ -8,6 +8,7 @@ class App extends Component {
     super();
     this.state = {
       reservations: [],
+      error: ''
     }
   }
 
@@ -15,6 +16,9 @@ class App extends Component {
     getAllReservations()
       .then(data => {
         this.setState({reservations: data})
+      })
+      .catch(error => {
+        this.setState({error: 'Something went wrong, please try again'})
       })
   }
 
