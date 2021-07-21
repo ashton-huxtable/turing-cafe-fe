@@ -13,6 +13,8 @@ class Form extends Component {
         }
     }
 
+   
+
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value})
     }
@@ -20,10 +22,11 @@ class Form extends Component {
     submitForm = (event) => {
         event.preventDefault();
         const newReservation = {
-            ...this.state
+          ...this.state
         }
-
-        this.props.addReservation(newReservation)
+       {(this.state.name.length && this.state.date.length && this.state.time.length && this.state.number) &&
+        this.props.addReservation(newReservation) 
+        }
         this.clearInput();
     }
 
